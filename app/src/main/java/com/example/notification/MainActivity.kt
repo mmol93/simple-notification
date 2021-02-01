@@ -14,7 +14,10 @@ import android.os.Bundle
 import androidx.core.app.NotificationCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.drawable.toDrawable
+import com.example.notification.Notification.notification
 import kotlinx.android.synthetic.main.activity_main.*
+// 다른 패키지에서 코틀린 파일 import 하기
+import com.example.notification.Notification.notification.*
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -90,6 +93,22 @@ class MainActivity : AppCompatActivity() {
             // 17. 이 부분에서 id를 재설정 가능
             manager.notify(20, notification)
         }
+        button3.setOnClickListener {
+            // 다른 패키지의 코틀린 파일의 생성자 만들기
+            val makeNotification : notification = notification()
+            val builder1 = makeNotification.makeNotification(this, "chanel3",
+                    "세 번째 알람", getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager)
+
+            builder1.setSmallIcon(android.R.drawable.ic_menu_search)
+            builder1.setContentTitle("테스트3")
+            builder1.setContentText("테스트 내용3")
+
+            val notification = builder1.build()
+
+            val manager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+            manager.notify(30, notification)
+        }
     }
     // 안드로이드 버전별로 Notification 실행 방법 달리하기
     // 1. notification 를 생성할 함수를 정의한다.
@@ -125,7 +144,6 @@ class MainActivity : AppCompatActivity() {
             // Builder에 deprecate가 생기는 이유는 8.0 이상부턴 지원하지 않기 때문
             val builder = NotificationCompat.Builder(this)
             return builder
-
         }
     }
 }
