@@ -39,6 +39,12 @@ class MainActivity : AppCompatActivity() {
             // 주로 미확인 문자 메시지 수를 표기할 때 사용
             builder1.setNumber(100)
 
+            // 알람이 계속 뜬 상채로 있게하기
+            builder1.setOngoing(true)
+
+            // 전체 알락 삭제를 눌러도 삭제 안되게 하기
+            builder1.setAutoCancel(true)
+
             // 11. notification 타이틀 설정
             builder1.setContentTitle("타이틀1")
 
